@@ -1,52 +1,39 @@
 package com.example.demo.controller;
 
-import com.example.demo.models.User;
-import com.example.demo.service.UsuarioService;
+import com.example.demo.models.Client;
+import com.example.demo.service.ClientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
+
+import java.util.List;
 import java.util.Optional;
 
-@RestController @RequestMapping("api")
+@RestController
+@RequestMapping("/api")
 public class AppController {
 
     @Autowired
-    UsuarioService usuarioService;
-
-    // Listar y Buscar Usuarios
-
-    @GetMapping("/saludar")
-    public String saludar(){
-        return "Hola";
-    }
+    private ClientService clientService;
 
     @GetMapping("/all")
-    public ArrayList<User> getAllUser(){
-        return usuarioService.getAllUsers();
+    public List<Client> getAllClients(){
+        return clientService.findAll();
     }
 
     @GetMapping("/find/{id}")
-    public Optional<User> getById(@PathVariable("id") long id){
-        return usuarioService.getUserById(id);
+    public Optional<Client> getClientById(@PathVariable("id") Long id){
+        return clientService.findClientById(id);
     }
-
-    // Guardar Usuario
 
     @PostMapping("/save")
-    public User saveUser(@RequestBody User user){
-        return usuarioService.saveUser(user);
+    public void saveClient(@RequestBody Client client){
+        clientService.saveClient(client);
     }
 
-    // Eliminar Usuario por medio de su ID
     @DeleteMapping("/delete/{id}")
-    public String deleteUser(@PathVariable("id") long id){
-
-        if (usuarioService.deleteUserById(id)){
-            return "El usuario del id: " + id + " se ha eliminado correctamente";
-        } else {
-            return "El usuario del id: " + id + " no pudo ser eliminado";
-        }
+    public void deleteUser(@PathVariable("id") Long id){
+        clientService.deleteClientById(id);
     }
 
 }
