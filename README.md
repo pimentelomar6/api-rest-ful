@@ -1,7 +1,7 @@
 # API RESTFul
 Desarrollo de api usando Java, Spring Boot
 
-### Tecnologías
+## Tecnologías
 - Java
 - Spring Boot
 - Spring Data JPA
@@ -10,3 +10,36 @@ Desarrollo de api usando Java, Spring Boot
 - MySQL
 - Lombok
 
+## Imágenes
+
+###  Seguridad
+
+>  Registro
+
+![Registro](https://github.com/pimentelomar6/api-rest-full/blob/master/images/register.jpg "Registro")
+
+>  Inicio de Sesión
+
+![Login](https://github.com/pimentelomar6/api-rest-full/blob/master/images/login.jpg "Login")
+
+>  Autorizacion
+
+![Authorization](https://github.com/pimentelomar6/api-rest-full/blob/master/images/authorization.jpg "Authorization")
+
+###  CRUD
+
+>  GET
+
+![GET ALL](https://github.com/pimentelomar6/api-rest-full/blob/master/images/getall.jpg "GET ALL")
+
+>  POST
+
+![SAVE USER](https://github.com/pimentelomar6/api-rest-full/blob/master/images/saveuser.jpg "SAVE USER")
+
+>  PUT
+
+![UPDATE USER](https://github.com/pimentelomar6/api-rest-full/blob/master/images/update.jpg "UPDATE USER")
+
+>  DELETE
+
+![DELETE USER](https://github.com/pimentelomar6/api-rest-full/blob/master/images/delete.jpg "DELETE USER")
