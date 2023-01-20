@@ -16,11 +16,11 @@ Desarrollo de api usando Java, Spring Boot
 
 >  Registro
 
-![Registro](https://github.com/pimentelomar6/api-rest-full/blob/master/images/register.jpg "Registro")
+![Registro](https://github.com/pimentelomar6/api-rest-full/blob/master/images/Register.jpg "Registro")
 
 >  Inicio de Sesión
 
-![Login](https://github.com/pimentelomar6/api-rest-full/blob/master/images/login.jpg "Login")
+![Login](https://github.com/pimentelomar6/api-rest-full/blob/master/images/Login.jpg "Login")
 
 >  Autorizacion
 
