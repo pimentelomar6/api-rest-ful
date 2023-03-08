@@ -12,8 +12,13 @@ import java.util.Optional;
 @Service
 public class ClientServiceImp implements ClientService {
 
-    @Autowired
+
     private ClientRepository clientRepository;
+
+    @Autowired
+    public ClientServiceImp(ClientRepository clientRepository) {
+        this.clientRepository = clientRepository;
+    }
 
     @Override
     public List<Client> findAll() {
@@ -34,5 +39,10 @@ public class ClientServiceImp implements ClientService {
     @Override
     public void deleteClientById(Long id) {
         clientRepository.deleteById(id);
+    }
+
+    @Override
+    public boolean existById(Long id) {
+        return clientRepository.existsById(id);
     }
 }

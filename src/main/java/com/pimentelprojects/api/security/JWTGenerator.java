@@ -12,7 +12,7 @@ import java.util.Date;
 @Component
 public class JWTGenerator {
 
-    public String generateToken(Authentication authentication){
+    public String generateToken(Authentication authentication) {
         String username = authentication.getName();
         Date currentDate = new Date();
         Date expirationDate = new Date(currentDate.getTime() + SecurityConstants.JWT_EXPIRATION);
@@ -28,22 +28,22 @@ public class JWTGenerator {
 
     }
 
-    public String getUsernameFromJwt(String token){
+    public String getUsernameFromJwt(String token) {
         Claims claims = Jwts.parser()
                 .setSigningKey(SecurityConstants.JWT_SECRET)
                 .parseClaimsJws(token)
                 .getBody();
 
-        return  claims.getSubject();
+        return claims.getSubject();
     }
 
-    public boolean validateToken(String token){
+    public boolean validateToken(String token) {
         try {
             Jwts.parser()
                     .setSigningKey(SecurityConstants.JWT_SECRET)
                     .parseClaimsJws(token);
             return true;
-        } catch (Exception e){
+        } catch (Exception e) {
             throw new AuthenticationCredentialsNotFoundException("Token expirado o no existente");
         }
     }

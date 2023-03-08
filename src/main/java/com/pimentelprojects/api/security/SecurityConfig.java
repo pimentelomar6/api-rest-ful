@@ -14,9 +14,11 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 
 @EnableWebSecurity
 public class SecurityConfig {
-
     @Autowired
     private JWTAuthEntryPoint jwtAuthEntryPoint;
+
+
+
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
@@ -25,8 +27,8 @@ public class SecurityConfig {
                 .exceptionHandling()
                 .authenticationEntryPoint(jwtAuthEntryPoint)
                 .and()
-                .authorizeRequests()
-                .antMatchers("/api/v1/auth/**").permitAll()
+                .authorizeHttpRequests()
+                .requestMatchers("/api/v1/auth/**").permitAll()
                 .anyRequest()
                 .authenticated()
                 .and()
@@ -44,12 +46,12 @@ public class SecurityConfig {
     }
 
     @Bean
-    PasswordEncoder passwordEncoder(){
+    PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
 
     @Bean
-    JWTAuthFilter jwtAuthFilter(){
+    JWTAuthFilter jwtAuthFilter() {
         return new JWTAuthFilter();
     }
 }

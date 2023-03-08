@@ -55,7 +55,7 @@ public class AuthController {
     @PostMapping("/register")
     public ResponseEntity<String> register(@RequestBody RegisterDto registerDto){
         if(userRepository.existsByUsername(registerDto.getUsername())){
-            return new ResponseEntity<>("El usuario esta tomado", HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>("El usuario ya está registrado", HttpStatus.BAD_REQUEST);
         }
 
         User user = new User();

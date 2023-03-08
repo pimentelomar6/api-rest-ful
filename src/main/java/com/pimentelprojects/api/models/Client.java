@@ -6,7 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 
 @Entity
 @Table(name = "clients")
@@ -18,7 +18,15 @@ public class Client {
 
     @Id
     @Column(nullable = false, unique = true)
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @SequenceGenerator(
+            name = "client_id_seq",
+            sequenceName = "client_id_seq",
+            allocationSize = 1
+    )
+    @GeneratedValue(
+            strategy = GenerationType.SEQUENCE,
+            generator = "client_id_seq"
+    )
     private Long id;
     private String name;
     @Column(nullable = false, unique = true)
