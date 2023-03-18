@@ -1,9 +1,14 @@
 package com.pimentelprojects.api.service;
 
+import com.pimentelprojects.api.dto.ClientResponse;
 import com.pimentelprojects.api.models.Client;
 import com.pimentelprojects.api.repository.ClientRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+
 
 
 import java.util.List;
@@ -13,7 +18,7 @@ import java.util.Optional;
 public class ClientServiceImp implements ClientService {
 
 
-    private ClientRepository clientRepository;
+    private final ClientRepository clientRepository;
 
     @Autowired
     public ClientServiceImp(ClientRepository clientRepository) {
@@ -21,8 +26,24 @@ public class ClientServiceImp implements ClientService {
     }
 
     @Override
-    public List<Client> findAll() {
-        return clientRepository.findAll();
+    public ClientResponse findAll(int pageNumber, int pageSize) {
+        Pageable pageable = PageRequest.of(pageNumber,pageSize);
+
+        Page<Client> clients = clientRepository.findAll(pageable);
+        List<Client> list = clients.getContent();
+
+        ClientResponse clientResponse = new ClientResponse();
+        clientResponse.setContent(list);
+        clientResponse.setPageNumber(clients.getNumber());
+        clientResponse.setPageSize(clients.getSize());
+        clientResponse.setTotalElements((int) clients.getTotalElements());
+        clientResponse.setTotalPages(clients.getTotalPages());
+        clientResponse.setLast(clients.isLast());
+
+
+        return clientResponse;
+
+
     }
 
     @Override

@@ -1,5 +1,6 @@
 package com.pimentelprojects.api.controller;
 
+import com.pimentelprojects.api.dto.ClientResponse;
 import com.pimentelprojects.api.models.Client;
 import com.pimentelprojects.api.service.ClientService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +17,7 @@ import java.util.Optional;
 public class AppController {
 
 
-    private ClientService clientService;
+    private final ClientService clientService;
 
     @Autowired
     public AppController(ClientService clientService) {
@@ -24,11 +25,14 @@ public class AppController {
     }
 
     @GetMapping
-    public ResponseEntity<List<Client>> getAllClients(){
-        if(clientService.findAll().isEmpty()){
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
-        return new ResponseEntity<List<Client>>(clientService.findAll(), HttpStatus.OK);
+    public ResponseEntity<ClientResponse> getAllClients(
+            @RequestParam(value = "pageNumber", defaultValue = "0", required = false) int pageNumber,
+            @RequestParam(value = "pageSize", defaultValue = "10", required = false) int pageSize
+    ){
+//        if(clientService.findAll(pageNumber,pageSize).isEmpty()){
+//            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+//        }
+        return new ResponseEntity<>(clientService.findAll(pageNumber,pageSize), HttpStatus.OK);
     }
 
     @GetMapping("{id}")
@@ -36,7 +40,7 @@ public class AppController {
         if(!clientService.existById(id)){
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
-        return new ResponseEntity<Optional<Client>>(clientService.findClientById(id), HttpStatus.OK);
+        return new ResponseEntity<>(clientService.findClientById(id), HttpStatus.OK);
     }
 
     @PostMapping
@@ -47,7 +51,7 @@ public class AppController {
 
         clientService.saveClient(client);
 
-        return new ResponseEntity<String>("Usuario creado exitosamente", HttpStatus.CREATED);
+        return new ResponseEntity<>("Usuario creado exitosamente", HttpStatus.CREATED);
     }
 
     @PutMapping
@@ -62,7 +66,7 @@ public class AppController {
 
         clientService.saveClient(client);
 
-        return new ResponseEntity<String>("Usuario actualizado exitosamente", HttpStatus.OK);
+        return new ResponseEntity<>("Usuario actualizado exitosamente", HttpStatus.OK);
     }
 
     @DeleteMapping("{id}")
@@ -71,7 +75,7 @@ public class AppController {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
         clientService.deleteClientById(id);
-        return new ResponseEntity<String>("Usuario eliminado exitosamente", HttpStatus.OK);
+        return new ResponseEntity<>("Usuario eliminado exitosamente", HttpStatus.OK);
     }
 
 }
