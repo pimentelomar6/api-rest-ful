@@ -12,7 +12,7 @@ import java.util.Date;
 public class GlobalExceptionHandler {
 
     @ExceptionHandler(ClientNotFoundException.class)
-    public ResponseEntity<ErrorObject> handlerClientNotFoundException(ClientNotFoundException ce, WebRequest request){
+    public ResponseEntity<ErrorObject> handlerClientNotFoundException(ClientNotFoundException ce, WebRequest request) {
         ErrorObject errorObject = new ErrorObject();
         errorObject.setStatusCode(HttpStatus.NOT_FOUND.value());
         errorObject.setMessage(ce.getMessage());
